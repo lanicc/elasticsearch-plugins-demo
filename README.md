@@ -128,6 +128,8 @@ docker restart $es_container
 
 http://localhost:5601/app/kibana#/dev_tools/console
 
+默认密码elastic:changeme
+
 
 
 ```javascript
