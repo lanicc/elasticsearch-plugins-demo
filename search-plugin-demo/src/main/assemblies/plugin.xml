@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<assembly>
+    <id>elasticsearch-plugins-search-lanicc</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <!-- 默认放到ES的config目录/<plugin> -->
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/config</directory>
+            <outputDirectory>elasticsearch/config</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <file>
+            <source>${project.basedir}/src/main/resources/plugin-descriptor.properties</source>
+            <outputDirectory>elasticsearch</outputDirectory>
+            <filtered>true</filtered>
+        </file>
+<!--        <file>-->
+<!--            <source>${project.basedir}/src/main/resources/plugin-security.policy</source>-->
+<!--            <outputDirectory>elasticsearch</outputDirectory>-->
+<!--            <filtered>true</filtered>-->
+<!--        </file>-->
+    </files>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>elasticsearch</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <useTransitiveFiltering>true</useTransitiveFiltering>
+            <excludes>
+                <exclude>org.elasticsearch:elasticsearch</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

@@ -1,0 +1,2 @@
+docker container stop es_for_plugins_demo kibana_for_plugins_demo
+docker container rm es_for_plugins_demo kibana_for_plugins_demo
