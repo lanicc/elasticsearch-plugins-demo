@@ -36,6 +36,12 @@ terms 查询的写法入下
 
 ### 体验
 
+可以执行 docker 目录下的脚本
+
+- setup.sh: 安装es环境，包含elasticsearch和kibana
+- package.sh: 源码编译打包
+- install.sh: 打包好的插件安装到es容器，并重启生效
+- destory.sh: 销毁docker容器
 
 
 #### 使用docker安装es环境
