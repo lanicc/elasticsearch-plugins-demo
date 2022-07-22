@@ -1,0 +1,37 @@
+# https://www.elastic.co/guide/en/elasticsearch/reference/5.5/docker.html
+# https://www.elastic.co/guide/en/kibana/5.5/_configuring_kibana_on_docker.html
+version: '2'
+services:
+  es_for_plugins_demo:
+    image: lanicc/elasticsearch-search-plugin-demo:1.0
+    container_name: es_for_plugins_demo
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    ports:
+      - 9200:9200
+    networks:
+      - es_net
+  kibana_for_plugins_demo:
+    image: docker.elastic.co/kibana/kibana:5.3.3
+    container_name: kibana_for_plugins_demo
+    environment:
+      ELASTICSEARCH_URL: http://es_for_plugins_demo:9200
+    ports:
+      - 5601:5601
+    networks:
+      - es_net
+
+volumes:
+  esdata1:
+    driver: local
+  esdata2:
+    driver: local
+
+networks:
+  es_net:

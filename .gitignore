@@ -1,2 +1,3 @@
 # Project exclude paths
 /search-plugin-demo/target/
+.idea/**

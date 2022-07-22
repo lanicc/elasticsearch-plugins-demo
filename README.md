@@ -36,12 +36,66 @@ terms 查询的写法入下
 
 ### 体验
 
+```bash
+docker-compose -p es-for-plugin-demo -f docker-compose-starter.yml up -d
+```
+
+
+#### 登录kibana体验
+
+http://localhost:5601/app/kibana#/dev_tools/console
+
+
+```javascript
+# 创建索引
+PUT a
+
+# 添加数据
+PUT a/doc/1
+{
+  "id": 1
+}
+
+PUT a/doc/2
+{
+  "id": 2
+}
+
+
+PUT a/doc/3
+{
+  "id": 3
+}
+
+```
+
+
+
+使用自定义的查询进行搜索
+
+```javascript
+GET a/doc/_search
+{
+  "query": {
+    "spiltToTerms": {
+      "sep": ",",
+      "field": "id",
+      "terms": "1,3"
+    }
+  }
+}
+```
+
+
+
+
+### 打包编译
 可以执行 docker 目录下的脚本
 
 - setup.sh: 安装es环境，包含elasticsearch和kibana
 - package.sh: 源码编译打包
 - install.sh: 打包好的插件安装到es容器，并重启生效
-- destory.sh: 销毁docker容器
+- destroy.sh: 销毁docker容器
 
 
 #### 使用docker安装es环境
@@ -93,7 +147,7 @@ networks:
 
 ```bash
 docker-compose -p es-for-plugin-demo up -d
-#默认密码elastic:changeme
+#es官方的镜像开启了xpack.security，默认密码elastic:changeme
 ```
 
 
@@ -121,56 +175,5 @@ docker exec $es_container /usr/share/elasticsearch/bin/elasticsearch-plugin inst
 docker restart $es_container
 
 ```
-
-
-
-#### 登录kibana体验
-
-http://localhost:5601/app/kibana#/dev_tools/console
-
-默认密码elastic:changeme
-
-
-
-```javascript
-# 创建索引
-PUT a
-
-# 添加数据
-PUT a/doc/1
-{
-  "id": 1
-}
-
-PUT a/doc/2
-{
-  "id": 2
-}
-
-
-PUT a/doc/3
-{
-  "id": 3
-}
-
-```
-
-
-
-使用自定义的查询进行搜索
-
-```javascript
-GET a/doc/_search
-{
-  "query": {
-    "spiltToTerms": {
-      "sep": ",",
-      "field": "id",
-      "terms": "1,3"
-    }
-  }
-}
-```
-
 
 

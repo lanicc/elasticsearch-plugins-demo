@@ -1,0 +1,9 @@
+FROM docker.elastic.co/elasticsearch/elasticsearch:5.3.3
+ADD elasticsearch.yml /usr/share/elasticsearch/config/
+ADD search-plugin-demo-1.0-SNAPSHOT.zip /usr/share/elasticsearch/
+USER root
+#删除x-pack
+#RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove x-pack
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install file:///usr/share/elasticsearch/search-plugin-demo-1.0-SNAPSHOT.zip
+RUN chown elasticsearch:elasticsearch config/elasticsearch.yml
+USER elasticsearch
