@@ -39,7 +39,9 @@ terms 查询的写法入下
 ```bash
 docker-compose -p es-for-plugin-demo -f docker-compose-starter.yml up -d
 ```
-
+使用es镜像的不是官方的镜像，是自己打包的
+https://hub.docker.com/r/lanicc/elasticsearch-search-plugin-demo
+关闭了xpack.security
 
 #### 登录kibana体验
 
